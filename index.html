@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Velocity Rush</title>
+  <style>
+    html,body{margin:0;height:100%;overflow:hidden;background:#05060a;color:#e8f1ff;font-family:system-ui,Segoe UI,Roboto,sans-serif}
+    #app{position:fixed;inset:0}
+    #game-canvas{position:absolute;inset:0;display:block;image-rendering:auto}
+    #ui{position:absolute;inset:0;pointer-events:none}
+    #ui *{pointer-events:auto}
+    #ui .hud, #ui .hud *{pointer-events:none}
+    #boot{position:absolute;inset:0;display:grid;place-items:center;font-size:20px;letter-spacing:.3em;color:#7af}
+  </style>
+</head>
+<body>
+  <div id="app"><div id="ui"></div><div id="boot">LOADING VELOCITY RUSH…</div></div>
+  <script>
+    // Use the WebGPU build when the browser supports it (Settings → Renderer: WebGL opts out).
+    (function () {
+      var s = {}; try { s = JSON.parse(localStorage.getItem('velocityRush.settings')) || {}; } catch (e) {}
+      var inGpu = /\/gpu\/(index\.html)?$/.test(location.pathname);
+      var wantGpu = !!navigator.gpu && s.renderer !== 'webgl' && !/[?&]nogpu/.test(location.search);
+      if (wantGpu && !inGpu) {
+        fetch('gpu/index.html', { method: 'HEAD' }).then(function (r) { if (r.ok) location.replace('gpu/'); }).catch(function () {});
+      } else if (!wantGpu && inGpu && !/[?&]forcegl/.test(location.search)) location.replace('../' + (navigator.gpu ? '' : '?nogpu'));
+    })();
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
