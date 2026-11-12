@@ -6,7 +6,7 @@
 export const TRACKS = [
   {
     id: 'harbor-loop',
-    name: 'Harbor Neon Loop',
+    name: 'Saltgate Harbor Loop',
     district: 'Saltgate Docks',
     laps: 3,
     width: 14,

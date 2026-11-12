@@ -52,7 +52,7 @@ export function setupPost(engine) {
   let bloom = null;
   if (q.bloom !== false) {
     const scale = q.name === 'low' ? 0.35 : 0.5; // UnrealBloom builds its own downsampled mip chain
-    bloom = new UnrealBloomPass(new THREE.Vector2(size.x * scale, size.y * scale), 0.55, 0.6, 0.85);
+    bloom = new UnrealBloomPass(new THREE.Vector2(size.x * scale, size.y * scale), 0.3, 0.5, 1.15); // subtle: only sun glints, lamps and lit windows bloom
     composer.addPass(bloom);
   }
   const vignette = new ShaderPass(VignetteShader);

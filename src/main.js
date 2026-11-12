@@ -228,7 +228,7 @@ function onSettingsChange(s) {
 /** Attract-mode scene behind the main menu. */
 function showBackdrop() {
   disposeWorld();
-  const env = setupEnvironment(engine, 'night');
+  const env = setupEnvironment(engine, TRACKS[0].timeOfDay || 'day');
   const track = new Track(TRACKS[0]);
   const city = buildCity(engine.scene, track, engine.quality);
   const show = buildCarModel(CARS[0], engine.quality);
